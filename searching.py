@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import time
 
 
 def read_data(file_name, field):
@@ -54,8 +55,26 @@ def binary_search(sequence, searched_number):
             right = mid - 1
     return None
 
+def cas(sekvence, cislo):
+    start = time.perf_counter()
 
+    for number in sekvence:
+        if number == cislo:
+            break
 
+    end = time.perf_counter()
+
+    duration = end - start
+    return duration
+
+def pattern_search(sekvence, hledany_vzor):
+    position = set()
+    delka_sekvence = len(sekvence)
+    delka_vzoru = len(hledany_vzor)
+    for i in range(delka_sekvence - delka_vzoru):
+        if sekvence[i:i+delka_vzoru] == hledany_vzor:
+            position.add(i)
+    return position
 
 
 def main():
@@ -66,5 +85,10 @@ def main():
     print(cislo)
     mid = binary_search(sequential_data_serazene , 48)
     print(mid)
+    halo = cas(sequential_data_serazene, 48)
+    print(halo)
+    sequential_data_genom = read_data("sequential.json", "dna_sequence")
+    genom = pattern_search(sequential_data_genom, "ATA")
+    print(genom)
 if __name__ == "__main__":
     main()
