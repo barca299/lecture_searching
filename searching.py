@@ -40,12 +40,31 @@ def linear_search(sequence, searched_number):
     slovnik = {"seznam_pozic": seznam_pozic, "count": count}
     return slovnik
 
+def binary_search(sequence, searched_number):
+    left = 0
+    right = len(sequence) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if sequence[mid] == searched_number:
+            return mid
+        elif sequence[mid] < searched_number:
+            left = mid + 1
+        elif sequence[mid] > searched_number:
+            right = mid - 1
+    return None
+
+
+
 
 
 def main():
     sequential_data = read_data("sequential.json", "unordered_numbers")
+    sequential_data_serazene = read_data("sequential.json", "ordered_numbers")
     print(sequential_data)
     cislo = linear_search(sequential_data, 5)
     print(cislo)
+    mid = binary_search(sequential_data_serazene , 48)
+    print(mid)
 if __name__ == "__main__":
     main()
